@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Untitled</title>
+  
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!DOCTYPE html><html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora de Impacto Pessoal</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background-color: #f0f8f5; }
+    h1 { color: #2e8b57; }
+    label, input, select { display: block; margin-top: 10px; }
+    button { margin-top: 20px; padding: 10px 20px; background-color: #2e8b57; color: white; border: none; cursor: pointer; }
+    .resultado { margin-top: 30px; background: #eafff5; padding: 15px; border-radius: 8px; }
+  </style>
+</head>
+<body>
+  <h1>Calculadora de Impacto Pessoal 🌍</h1><label for="banho">⏱ Tempo de banho por dia (min):</label> <input type="number" id="banho" min="0">
+
+<label for="roupas">👕 Roupas novas por mês:</label> <input type="number" id="roupas" min="0">
+
+<label for="plasticos">🧃 Produtos plásticos por semana:</label> <input type="number" id="plasticos" min="0">
+
+<label for="transporte">🚌 Como vai para a escola:</label> <select id="transporte"> <option value="carro">Carro</option> <option value="onibus">Ônibus</option> <option value="bicicleta">Bicicleta</option> <option value="ape">A pé</option> </select>
+
+<button onclick="calcularImpacto()">Calcular Impacto</button>
+
+  <div class="resultado" id="resultado"></div>  <script>
+    function calcularImpacto() {
+      const banho = parseFloat(document.getElementById('banho').value) || 0;
+      const roupas = parseInt(document.getElementById('roupas').value) || 0;
+      const plasticos = parseInt(document.getElementById('plasticos').value) || 0;
+      const transporte = document.getElementById('transporte').value;
+
+      // Cálculos
+      const litrosAguaMes = banho * 12 * 30;
+      const roupasCO2Ano = roupas * 25 * 12;
+      const plasticosCO2Ano = plasticos * 0.1 * 52;
+      let transporteCO2Ano = 0;
+
+      if (transporte === 'carro') transporteCO2Ano = 10 * 0.21 * 365;
+      else if (transporte === 'onibus') transporteCO2Ano = 10 * 0.1 * 365;
+
+      const totalCO2Ano = roupasCO2Ano + plasticosCO2Ano + transporteCO2Ano;
+
+      document.getElementById('resultado').innerHTML = `
+        <strong>💧 Água:</strong> ${litrosAguaMes.toFixed(0)} litros por mês<br>
+        <strong>🌍 CO₂:</strong> ${totalCO2Ano.toFixed(2)} kg por ano<br>
+        <strong>💰 Dinheiro:</strong> Estimativa: R$${(litrosAguaMes * 0.004).toFixed(2)} por mês com banho
+      `;
+    }
+  </script></body>
+</html>
+<!-- partial -->
+  
+</body>
+</html>
